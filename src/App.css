@@ -1,0 +1,148 @@
+#root {
+  margin: 0 30px;
+  display: flex;
+  justify-content: center;
+}
+
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f7dede;
+}
+
+h1 {
+  font-size: 2em;
+  margin: 20px 0;
+  text-align: center;
+  position: relative;
+}
+
+h1::after {
+  content: "";
+  display: block;
+  width: 10%;
+  margin: 0 auto; 
+  border-bottom: 2px solid #333;
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  right: 0;
+}
+
+table {
+  width: fit-content;
+  height: 530px;
+  margin: 20px 0;
+  border: none;
+  border-collapse: collapse;
+  box-shadow: 0 0 50px rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+  background-color: aliceblue;
+}
+
+th,
+td {
+  padding: 12px 15px;
+}
+
+tbody tr td:nth-child(1),
+tbody tr td:nth-child(2){
+  width: 5%;
+  text-align: center;
+}
+
+tbody tr td:nth-child(3) {
+  width: 30%;
+}
+
+tbody tr td:nth-child(4) {
+  text-align: left;
+  width: 60%;
+}
+
+
+tr:nth-child(even) {
+  background-color: #dce6ff;
+}
+
+th {
+  background-color: #e4faf7;
+  color: #333;
+  border: none;
+  font-size: 17px;
+  border-bottom: 2px solid #333;
+}
+
+th:first-child {
+  border-radius: 20px 0 0 0;
+}
+
+th:last-child {
+  border-radius: 0 20px 0 0;
+}
+
+
+tr:hover {
+  background-color: #ddccf1;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+
+tr:last-child:hover td:first-child {
+  border-bottom-left-radius: 20px;
+}
+
+tr:last-child:hover td:last-child {
+  border-bottom-right-radius: 20px;
+}
+.pagination {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 1.5rem;
+  list-style: none;
+  padding: 0;
+}
+
+a {
+  width: 40px;
+  height: 40px;
+  font-family: inherit;
+  font-weight: 600;
+  font-size: 16px;
+  margin: 0 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background: transparent;
+  color: #eee;
+}
+
+a:hover {
+  background: #ba92d7;
+  color: #eee;
+}
+
+.page-item {
+  margin: 0 5px;
+}
+
+.page-link {
+  padding: 8px 16px;
+  color: #333;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.page-item.active .page-link {
+  font-weight: 900;
+  border-color: #101010;
+  background: #e2cff1;
+  color: #101010;
+}
