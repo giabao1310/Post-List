@@ -15,24 +15,38 @@ body {
   background-color: #f7dede;
 }
 
+.header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;  
+}
+
 h1 {
   font-size: 2em;
   margin: 20px 0;
-  text-align: center;
+  text-align: left;
   position: relative;
 }
 
 h1::after {
   content: "";
   display: block;
-  width: 10%;
+  width: 100%;
   margin: 0 auto; 
   border-bottom: 2px solid #333;
   position: absolute;
-  bottom: -1px;
-  left: 0;
-  right: 0;
+  bottom: -5px;
 }
+
+.add-btn {
+  padding: 10px 20px;
+  border: none;
+  margin-right: 40px;
+  border-radius: 5px;
+  background-color: #4c9e4e;
+  color: #f7f7f7;
+  cursor: pointer;
+} 
 
 table {
   width: fit-content;
@@ -101,6 +115,29 @@ tr:last-child:hover td:first-child {
 tr:last-child:hover td:last-child {
   border-bottom-right-radius: 20px;
 }
+
+.action{
+  display: flex;
+}
+
+.action button {
+  margin: 0 5px;
+  padding: 8px 15px;
+  border: none;
+  border-radius: 5px;
+}
+
+.action .edit-btn {
+  background-color: #4aa4ff;
+  color: #f7f7f7;
+}
+
+.action .del-btn {
+  background-color: #d12009;
+  color: #f7f7f7;
+}
+
+
 .pagination {
   display: flex;
   flex-wrap: wrap;
@@ -143,6 +180,6 @@ a:hover {
 .page-item.active .page-link {
   font-weight: 900;
   border-color: #101010;
-  background: #e2cff1;
+  background: #cfa2f2;
   color: #101010;
 }

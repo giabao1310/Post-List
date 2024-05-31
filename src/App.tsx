@@ -5,7 +5,10 @@ function App() {
 
   return (
     <div className="App">
-      <h1>Post List</h1>
+      <div className='header'>
+        <h1>Post List</h1>
+        <button className='add-btn'>Add</button>
+      </div>
       <PostTable />
     </div>
 
