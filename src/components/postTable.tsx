@@ -1,58 +1,61 @@
-import React, { useEffect, useState } from "react";
-import { Data } from "../types";
+import React, { useState } from "react";
+import { useFetchPost } from "../hooks/useFetchPost";
+import { useDeletePost } from "../hooks/useDeletePost";
+import { useUpdatePost } from "../hooks/useUpdatePost";
+import EditPost from "./editPost";
 import Pagination from "./pagination";
-import { deletePost } from "../api";
-import { useQueryClient, useMutation } from "@tanstack/react-query";
-import axios from "axios";
+import { Data } from "../types/post";
+
 
 const PostTable: React.FC = () => {
-    const [post, setPost] = useState<Data[]>([]);
-    const [loading, setLoading] = useState(true);
-    const [currentPage, setCurrentPage] = useState(1);
+    const [currentPage, setCurrentPage] = useState(1); 
     const postPerPage = 7;
-    const url = "https://jsonplaceholder.typicode.com/posts";
-    const queryClient = useQueryClient();
+    const [editing, setEditing] = useState<Data | null>(null);
 
-    const {mutate} = useMutation({ 
-        mutationFn: (id: number) =>  deletePost(id), 
-        onSuccess: () => queryClient.invalidateQueries({queryKey:["posts"]})
-    });
-
-    useEffect(() => {
-        const fetchPost = async () => {
-            try{
-                const response = await axios.get(url);
-                setPost(response.data);
-                setLoading(false);
-            }
-            catch(error){
-                console.error("Error fetching data: ", error);
-            }
-        }
-
-        fetchPost();
-    }, []);
+    const { data: post, isLoading } = useFetchPost();
+    const { mutate: deletePost } = useDeletePost();
+    const { mutate: updatePost } = useUpdatePost();
 
     const indexOfLastPost = currentPage * postPerPage;
     const indexOfFirstPost = indexOfLastPost - postPerPage;
-    const currentPost = post.slice(indexOfFirstPost, indexOfLastPost);
+    const currentPost = post?.slice(indexOfFirstPost, indexOfLastPost) || [];
 
     const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
 
+
+    // Function to update post
+    const handleUpdate = (updatedPost: Data) => {
+        updatePost(updatedPost);
+        setEditing(null);
+    }
+
+    // Function to handle edit post
+    const handleEdit = (post: Data) => {
+        setEditing(post);
+    }
+
+    const cancelEdit = () => {
+        setEditing(null);
+    }
+
+    // Function to delete post
     const handleDelete = (id: number) => {
-        mutate(id, {
-            onSuccess: () => {
-                setPost((prevPosts) => prevPosts.filter(post => post.id !== id));
-            }
-        });
+        deletePost(id);
     };
 
-    if (loading) {
+    if (isLoading) {
         return <h2>Loading...</h2>;
     }
 
     return (
         <div>
+            {editing && (
+                <EditPost
+                    post={editing}
+                    cancelEdit={cancelEdit}
+                    updatePost={handleUpdate}
+                />
+            )}
             <table>
                 <thead>
                     <tr>
@@ -71,7 +74,7 @@ const PostTable: React.FC = () => {
                             <td>{post.title}</td>
                             <td>{post.body}</td>
                             <td className="action">
-                                <button className="edit-btn">Edit</button>
+                                <button className="edit-btn" onClick={() => handleEdit(post)}>Edit</button>
                                 <button className="del-btn" onClick={() => handleDelete(post.id)}>Delete</button>
                             </td>
                         </tr>
@@ -80,7 +83,7 @@ const PostTable: React.FC = () => {
             </table>
             <Pagination
                 postPerPage={postPerPage}
-                totalPost={post.length}
+                totalPost={post?.length || 0}
                 paginate={paginate}
                 currentPage={currentPage}
             />
