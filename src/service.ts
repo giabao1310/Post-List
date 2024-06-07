@@ -17,3 +17,12 @@ export const updatePost = async (updatedPost: Data): Promise<void> => {
     throw new Error("Failed to update post with id ${id}: ${error.message}")
   }
 };
+
+export const createPost = async (newPost: Data): Promise<void> => {
+  try {
+    const response = await axios.post(POST_API, newPost);
+    return response.data;
+  } catch (error) {
+    throw new Error("Failed to create post: ${error.message}");
+  }
+}

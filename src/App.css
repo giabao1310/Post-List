@@ -15,6 +15,7 @@ body {
   background-color: #f7dede;
 }
 
+/* Style for title Post List */
 .header{
   display: flex;
   justify-content: space-between;
@@ -37,7 +38,10 @@ h1::after {
   position: absolute;
   bottom: -5px;
 }
+/* end style */
 
+
+/* Style for add button */
 .add-btn {
   padding: 10px 20px;
   border: none;
@@ -47,6 +51,49 @@ h1::after {
   color: #f7f7f7;
   cursor: pointer;
 } 
+/* end style */
+
+
+/* style of modal form for action add and edit */
+/* .popup {
+  display: none;
+  position: fixed; 
+  z-index: 1; 
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto; 
+  background-color: rgb(0,0,0); 
+  background-color: rgba(0,0,0,0.4); 
+}
+
+.popup.show {
+  display: block;
+}
+
+.popup-inner {
+  background-color: #fefefe;
+  margin: 10% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%; 
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+} */
+/* end style */
 
 table {
   width: fit-content;

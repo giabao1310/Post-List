@@ -15,4 +15,5 @@ export const useFetchPost = () => {
         queryKey: ["posts"],
         queryFn: FetchPost,
     });
-};
+}; 
+

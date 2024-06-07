@@ -6,6 +6,10 @@ export const useDeletePost = () => {
 
     return useMutation({
         mutationFn: (id: number) => deletePost(id),
-        onSuccess: () => queryClient.invalidateQueries({ queryKey: ["posts"] }),
+        onSuccess: () => {
+            queryClient.invalidateQueries({
+                queryKey: ["posts"]
+            });
+        }
     });
 };

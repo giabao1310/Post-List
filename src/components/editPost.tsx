@@ -7,11 +7,11 @@ interface EditPostProps {
     cancelEdit: () => void;
 }
 
-const EditPost: React.FC<EditPostProps> = ({ post : initialPost, updatePost, cancelEdit }) => {
+const EditPost: React.FC<EditPostProps> = ({ post: initialPost, updatePost, cancelEdit }) => {
     const [post, setPost] = useState<Data>(initialPost);
 
     useEffect(() => {
-        setPost(initialPost);   
+        setPost(initialPost);
     }, [initialPost])
 
     const [newTitle, setTitle] = useState(post.title);
@@ -25,6 +25,7 @@ const EditPost: React.FC<EditPostProps> = ({ post : initialPost, updatePost, can
     return (
         <div className="popup">
             <div className="popup-inner">
+                <span className="close" onClick={cancelEdit}>&times;</span>
                 <h2>Edit Post</h2>
                 <input
                     type="text"
